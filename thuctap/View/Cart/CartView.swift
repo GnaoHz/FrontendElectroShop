@@ -27,7 +27,7 @@ struct CartView: View {
                             .foregroundStyle(.white)
                     }
                 }
-                .padding(10)
+                .padding(11)
                 .background(
                     RoundedRectangle(cornerRadius: 20)
                         .fill(Color.red)
