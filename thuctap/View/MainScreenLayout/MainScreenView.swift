@@ -3,7 +3,7 @@
 import SwiftUI
 
 struct MainScreenView: View {
-    @State private var selectedTab: Tab = .cart
+    @State private var selectedTab: Tab = .category
    
     var body: some View {
         VStack(spacing:0){

@@ -8,18 +8,32 @@
 import SwiftUI
 
 struct ListCardView: View {
-    @Binding var isChecked: Bool
+    var totalPrice: Int = 0
     var body: some View {
-        VStack(spacing:10) {
+        VStack(spacing:0) {
             ScrollView{
-                CartItemView(isChecked: $isChecked)
-                CartItemView(isChecked: $isChecked)
-                CartItemView(isChecked: $isChecked)
-                CartItemView(isChecked: $isChecked)
-                CartItemView(isChecked: $isChecked)
-                Spacer(minLength: 20)
+                CartItemView()
+                CartItemView()
+                CartItemView()
+                CartItemView()
+                CartItemView()
+                Spacer(minLength: 10)
             }
             .padding([.horizontal,.top],10)
+            .scrollIndicators(.hidden)
+            HStack{
+                Text("Total: \(totalPrice) $")
+                Spacer()
+                IconTextbutton(icon: "creditcard.fill", text: "Checkout")
+            }
+            .padding(.horizontal,15)
+            .padding(.vertical,10)
+            .background(
+                Rectangle()
+                    .fill(Color.white)
+                    .shadow(radius: 5)
+            )
+            
         }
         .frame(maxWidth: .infinity,maxHeight: .infinity)
         .background(
@@ -38,7 +52,7 @@ struct CartItemView: View {
     var price: Int = 1000
     @State var quantity: Int = 1
     var onDelete: () -> Void = {}
-    @Binding var isChecked: Bool
+    
     var body: some View {
         HStack(spacing:0){
             Image(nameIcon)
@@ -61,7 +75,7 @@ struct CartItemView: View {
             Spacer()
             VStack{
                 DeleteButton(onDelete: {})
-                CheckBoxView(isChecked: $isChecked )
+                
             }
                 .padding(.trailing,5)
         }
@@ -75,27 +89,7 @@ struct CartItemView: View {
     }
 }
 
-struct QuantitySelectorView: View {
-    @Binding var quantity: Int
-    var body: some View {
-        HStack{
-            Button(action:{
-                if quantity>1{
-                    quantity -= 1
-                }
-            }){
-                Image(systemName: "minus")
-            }
-            Text("\(quantity)")
-            Button(action:{
-                quantity += 1
-            }){
-                Image(systemName: "plus")
-            }
-        }
-    }
-}
 
 #Preview {
-    ListCardView(isChecked: .constant(true))
+    ListCardView()
 }

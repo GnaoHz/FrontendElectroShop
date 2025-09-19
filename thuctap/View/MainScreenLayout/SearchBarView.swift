@@ -40,6 +40,7 @@ struct SearchBarView: View {
                     
                 }
         }
+        .background(.white)
     }
 }
 

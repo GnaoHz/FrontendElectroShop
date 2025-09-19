@@ -14,8 +14,8 @@ struct ContentView: View {
             FavoriteView()
         case .cart:
             CartView()
-        default :
-            HomeView()
+        case .category:
+            CategoryView()
         }
     }
 }
