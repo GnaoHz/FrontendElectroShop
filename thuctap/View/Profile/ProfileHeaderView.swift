@@ -2,6 +2,8 @@
 
 import SwiftUI
 struct ProfileHeaderView: View {
+    @EnvironmentObject var profileViewModel: ProfileViewModel
+    @EnvironmentObject var userViewModel: UserViewModel
     var body: some View {
         HStack(spacing:0){
             Image("m3")
@@ -12,12 +14,13 @@ struct ProfileHeaderView: View {
                 .padding(.leading,15)
             Spacer()
             VStack(spacing:7) {
-                Text("Nguyen Viet Hoang")
+                Text(profileViewModel.profile.fullName)
                     .font(.system(size: 20, weight: .bold))
-                Text(verbatim:"ht98vv@gmail.com")
+                Text(userViewModel.user?.email ?? "No Email")
                     .font(.system(size: 15))
                     .foregroundStyle(.black)
             }
+            
             Spacer()
         }
         .padding([.top,.bottom],15)
@@ -25,13 +28,15 @@ struct ProfileHeaderView: View {
         .background(
             RoundedRectangle(cornerRadius: 20)
                 .fill(Color.white)
-                //.stroke(Color.black, lineWidth: 1)
+                
                 .shadow(radius: 5)
         )
         .padding(.horizontal,20)
     }
+       
 }
-#Preview{
+#Preview {
     ProfileHeaderView()
-    Spacer(minLength: 200)
+        .environmentObject(ProfileViewModel())
+        .environmentObject(UserViewModel())
 }

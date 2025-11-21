@@ -23,16 +23,17 @@ struct AddToCartButton: View {
     }
 }
 
-struct DeleteButton:View {
-    var onDelete: () -> Void
+struct CustomButton:View {
+    var nameIcon: String="trash.fill"
+    var onTap: () -> Void
     var body: some View {
-        VStack {
-            Button(action: onDelete) {
-                Image(systemName: "trash.fill")
+        VStack(spacing:0) {
+            Button(action: onTap) {
+                Image(systemName: nameIcon)
                     .font(.system(size: 20))
                     .foregroundStyle(.red)
             }
-            Spacer(minLength: 0)
+            
         }
     }
 }

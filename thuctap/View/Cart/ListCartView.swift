@@ -8,21 +8,34 @@
 import SwiftUI
 
 struct ListCardView: View {
-    var totalPrice: Int = 0
+    @EnvironmentObject var cartViewModel: CartViewModel
+    @EnvironmentObject var productViewModel: ProductViewModel
+    
+    
+    @State private var selectedProduct: Product?=nil
+    
     var body: some View {
         VStack(spacing:0) {
             ScrollView{
-                CartItemView()
-                CartItemView()
-                CartItemView()
-                CartItemView()
-                CartItemView()
+                ForEach(cartViewModel.cart, id: \.product) { cartItem in
+                    CartItemView(product: cartItem.product) {
+                        cartViewModel.remove(product: cartItem.product)
+                    }
+                    .onTapGesture {
+                        selectedProduct = cartItem.product
+                    }
+                }
                 Spacer(minLength: 10)
             }
             .padding([.horizontal,.top],10)
             .scrollIndicators(.hidden)
+            .navigationDestination(item: $selectedProduct) { product in
+                if let index = productViewModel.products.firstIndex(where: { $0.id == product.id }) {
+                    DetailProductView(product: $productViewModel.products[index])
+                }
+            }
             HStack{
-                Text("Total: \(totalPrice) $")
+                Text("Total: \(cartViewModel.total) $")
                 Spacer()
                 IconTextbutton(icon: "creditcard.fill", text: "Checkout")
             }
@@ -47,34 +60,32 @@ struct ListCardView: View {
 }
 
 struct CartItemView: View {
-    var nameIcon: String = "apple"
-    var nameItem: String = "quanlytaikhoan"
-    var price: Int = 1000
+    let product: Product
     @State var quantity: Int = 1
     var onDelete: () -> Void = {}
     
     var body: some View {
         HStack(spacing:0){
-            Image(nameIcon)
+            Image(product.nameImage)
                 .resizable()
                 .scaledToFit()
                 .frame(width: 100,height: 100)
-                .background(.gray)
+                //.background(.gray)
                 .padding(.leading,5)
             Spacer()
             VStack(alignment: .leading,spacing: 10){
-                Text(nameItem)
+                Text(product.nameProduct)
                     .font(.system(size: 20,weight: .bold))
                 
-                TotalRatingView(totalRating: 3.5)
+                TotalRatingView(totalRating: product.rating)
                 
-                Text("\(price) $")
+                Text("\(product.price) $")
                     .font(.system(size: 15,weight: .regular))
                 QuantitySelectorView(quantity: $quantity)
             }
             Spacer()
             VStack{
-                DeleteButton(onDelete: {})
+                CustomButton(onTap: onDelete)
                 
             }
                 .padding(.trailing,5)
@@ -92,4 +103,6 @@ struct CartItemView: View {
 
 #Preview {
     ListCardView()
+        .environmentObject(ProductViewModel())
+        .environmentObject(CartViewModel())
 }

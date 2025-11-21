@@ -61,15 +61,21 @@ struct TitleSale: View {
 }
 
 struct DiscountedProductList:View {
+    @EnvironmentObject var cartViewModel:CartViewModel
+    @EnvironmentObject var productViewModel:ProductViewModel
     let spacing:CGFloat = UIScreen.main.bounds.width-(UIScreen.screenWidth+25)*2
     var body: some View {
         ScrollView(.horizontal,showsIndicators: false){
             HStack (spacing:spacing){
-                DiscountedProductCard()
-                
-                DiscountedProductCard()
-                
-                DiscountedProductCard()
+                ForEach(productViewModel.sales,id:\.id){product in
+                    DiscountedProductCard(
+                        imageName: product.nameImage,
+                        name: product.nameProduct,
+                        discountedPrice: product.price
+                    ){
+                        cartViewModel.add(product: product)
+                    }
+                }
             }
             
         }
@@ -79,9 +85,9 @@ struct DiscountedProductList:View {
 struct DiscountedProductCard: View {
     var imageName: String = "m3"
     var name: String = "Mac 1"
-    var discountedPrice: String = "1,000"
-    var originalPrice: String = "1,200"
-    
+    var discountedPrice: Int = 1000
+    var originalPrice:Int = 2800
+    var onTap: (() -> Void)
     var body: some View {
         VStack(alignment: .center, spacing: 10) {
             Image(imageName)
@@ -91,7 +97,7 @@ struct DiscountedProductCard: View {
                     width: UIScreen.screenWidth,
                     height: UIScreen.screenWidth / 4 * 3
                 )
-                .background(.green)
+                //.background(.green)
                 .padding(.horizontal, 5)
             
             Text(name)
@@ -108,7 +114,7 @@ struct DiscountedProductCard: View {
                 
                 Spacer()
                 
-                Text("-20%")
+                Text("HOT")
                     .foregroundStyle(.white)
                     .padding(5)
                     .background(Color.red)
@@ -117,7 +123,7 @@ struct DiscountedProductCard: View {
             .padding(.horizontal, 15)
             
             AddToCartButton {
-                // handle add to cart
+                onTap()
             }
         }
         .padding(.vertical, 10)
@@ -128,7 +134,4 @@ struct DiscountedProductCard: View {
         )
         .frame(height: 350)
     }
-}
-#Preview {
-    SaleView()
 }

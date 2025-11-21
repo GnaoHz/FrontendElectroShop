@@ -96,8 +96,8 @@ struct SocialLoginButton: View {
 }
 
 struct InputField: View {
-    let title: String
-    let placeholder: String
+    var title: String
+    var placeholder: String
     @Binding var text: String
     var isSecure: Bool = false
     
