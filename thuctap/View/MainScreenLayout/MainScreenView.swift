@@ -1,19 +1,26 @@
-
-
 import SwiftUI
 
 struct MainScreenView: View {
-    @State private var selectedTab: Tab = .category
-   
+    @StateObject var profileViewModel = ProfileViewModel()
+    @StateObject var userViewModel = UserViewModel()
+    @StateObject var productViewModel = ProductViewModel()
+    @StateObject var cartViewModel = CartViewModel()
+    @State private var selectedTab: Tab = .home
+    
     var body: some View {
-        VStack(spacing:0){
-            ContentView(selectedTab: $selectedTab)
+        NavigationStack {
+            VStack(spacing: 0) {
+                ContentView(selectedTab: $selectedTab)
                 .frame(maxHeight: .infinity)
-            
-            NavigationBarView(selectedTab: $selectedTab)
-            
+                
+                NavigationBarView(selectedTab: $selectedTab)
+            }
+            .ignoresSafeArea(.all, edges: .bottom)
         }
-        .ignoresSafeArea(.all, edges: .bottom)
+        .environmentObject(profileViewModel)
+        .environmentObject(userViewModel)
+        .environmentObject(productViewModel)
+        .environmentObject(cartViewModel)
     }
 }
 

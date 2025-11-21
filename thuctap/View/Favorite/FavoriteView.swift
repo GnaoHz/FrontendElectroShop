@@ -11,7 +11,6 @@ struct FavoriteView: View {
             VStack(spacing:20){
                 TitleFontView(titleName: "Favorite",color: .white)
                 ListFavoriteView()
-                
             }
         }
     }

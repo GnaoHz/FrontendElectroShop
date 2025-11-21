@@ -1,0 +1,21 @@
+{
+  "images" : [
+    {
+      "filename" : "iphone-16-pro-white-titan-1-638621709569959167-650x650.png",
+      "idiom" : "universal",
+      "scale" : "1x"
+    },
+    {
+      "idiom" : "universal",
+      "scale" : "2x"
+    },
+    {
+      "idiom" : "universal",
+      "scale" : "3x"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}

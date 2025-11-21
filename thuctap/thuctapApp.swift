@@ -16,6 +16,7 @@ enum AppScreen {
     case login
     case register
     case mainscreen
+   
 }
 
 class AppState: ObservableObject {
@@ -35,6 +36,5 @@ struct RootView: View {
         case .mainscreen:
             MainScreenView()
         }
-        
     }
 }

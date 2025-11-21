@@ -1,25 +1,33 @@
-
-
 import SwiftUI
 
 struct ListFavoriteView: View {
-    @State private var favorites = ["a","b","c","d"]
+    @EnvironmentObject var productViewModel: ProductViewModel
+    @State private var selectedProduct: Product? = nil
     
     var body: some View {
-        ScrollView{
-            VStack(spacing:15){
-                ForEach(favorites, id: \.self){item in
-                    FavoriteItemView(nameItem: item){
-                        if let index = favorites.firstIndex(of: item){
-                            favorites.remove(at: index)
+        VStack {
+            ScrollView {
+                VStack(spacing: 15) {
+                    ForEach(productViewModel.favorites, id: \.nameProduct) { product in
+                        FavoriteItemView(product: product) {
+                            productViewModel.toggleFavorite(for: product)
                         }
+                        .onTapGesture {
+                            selectedProduct = product
+                        }
+                        .padding(.horizontal, 15)
                     }
-                    .padding(.horizontal,15)
+                }
+                .padding(.top, 15)
+            }
+            .navigationDestination(item: $selectedProduct) { product in
+                if let index = productViewModel.products.firstIndex(where: { $0.id == product.id }) {
+                    
+                    DetailProductView(product: $productViewModel.products[index])
                 }
             }
-            .padding(.top,15)
         }
-        .frame(maxWidth: .infinity)
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
         .background(
             UnevenRoundedRectangle(
                 topLeadingRadius: 20,
@@ -30,38 +38,44 @@ struct ListFavoriteView: View {
     }
 }
 struct FavoriteItemView: View {
-    var nameItem: String = "m3"
+    let product: Product
     var onDelete: () -> Void
+    
     var body: some View {
-        HStack(spacing:0){
-            Image("gg")
+        HStack(spacing: 0) {
+            Image(product.nameImage)
                 .resizable()
                 .scaledToFit()
-                .frame(width: 150, height: 150)
-                .padding(.leading,5)
+                .frame(width: 120, height: 120)
+                .padding(.leading, 5)
+            
             Spacer()
-            VStack(spacing:10){
-                Text(nameItem)
-                    .font(.system(size: 20,weight: .bold))
-                TotalRatingView()
-                Text("100.000"+"$")
+            
+            VStack(spacing: 10) {
+                Text(product.nameProduct)
+                    .font(.system(size: 20, weight: .bold))
                 
+                TotalRatingView(totalRating: product.rating)
+                
+                Text("\(product.price) $")
             }
             Spacer()
-            DeleteButton(onDelete: onDelete)
-                .padding(.trailing,5)
+            CustomButton(onTap: onDelete)
+                .padding(.trailing, 5)
         }
         .padding(5)
-        .frame(maxWidth:.infinity)
+        .frame(maxWidth: .infinity)
         .background(
             RoundedRectangle(cornerRadius: 20)
                 .fill(.white)
                 .shadow(radius: 5)
         )
-        
     }
 }
 
 #Preview {
-    ListFavoriteView()
+    NavigationStack {
+        ListFavoriteView()
+            .environmentObject(ProductViewModel())
+    }
 }
