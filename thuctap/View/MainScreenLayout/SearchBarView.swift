@@ -66,6 +66,7 @@ struct SearchBarView: View {
                             }
                         }
                     }
+                    
                     // Hiển thị gợi ý
                     if !filteredSuggestions.isEmpty {
                         ScrollView {
@@ -73,9 +74,10 @@ struct SearchBarView: View {
                                 ForEach(filteredSuggestions, id: \.self) { suggestion in
                                     Text(suggestion)
                                         .font(.system(size: 19))
+                                        .foregroundStyle(.white)
                                         .padding(10)
                                         .frame(maxWidth: .infinity, alignment: .leading)
-                                        .background(Color.gray)
+                                        .background(Color.gray.opacity(1))
                                         .onTapGesture {
                                             searchText = suggestion
                                             isFocusTextField = false
@@ -88,6 +90,7 @@ struct SearchBarView: View {
                         .frame(maxHeight: 150)
                         //.padding(.horizontal)
                     }
+                    Spacer()
                 }
 
                 VStack(alignment:.leading) {
@@ -95,7 +98,6 @@ struct SearchBarView: View {
                         Image(systemName: "bell.fill")
                             .font(.system(size: 25))
                             .foregroundColor(.yellow)
-                            
                     }
                     .padding(.top,10)
                     Spacer()
@@ -103,10 +105,7 @@ struct SearchBarView: View {
             }
             .padding(.vertical, 10)
             .padding(.horizontal)
-
-            
         }
-        .background(.blue)
     }
 }
 

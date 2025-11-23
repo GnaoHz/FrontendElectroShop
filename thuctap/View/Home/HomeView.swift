@@ -9,16 +9,15 @@ struct HomeView: View {
             //Color.green.edgesIgnoringSafeArea(.all)
             ScrollView() {
                 VStack(spacing:20){
-                    SearchBarView(searchText: $searchText)
                     AdBannerView()
                     SaleView()
                     PopularView()
                     RecommendView()
                 }
             }
-            
-            .background(.white)
-            .padding(.top,1)
+            //.background(.white)
+            .padding(.top,70)
+            SearchBarView(searchText: $searchText)
         }
     }
 }
