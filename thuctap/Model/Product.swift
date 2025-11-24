@@ -41,3 +41,17 @@ enum ProductType: String, Hashable {
     case accessory
 }
 
+extension ProductType {
+    var displayName: String {
+        switch self {
+        case .iphone: return "Phone"
+        case .tablet: return "Tablet"
+        case .laptop: return "Laptop"
+        case .pc: return "PC"
+        case .audio: return "Audio"
+        case .smartwatch: return "Smartwatch"
+        case .gaming: return "Gaming"
+        case .accessory: return "Accessory"
+        }
+    }
+}

@@ -5,11 +5,11 @@ struct CategoryView: View {
     @EnvironmentObject var productViewModel: ProductViewModel
     @State var searchText: String = ""
     @State var selectedType: ProductType? = nil
+    
     var body: some View {
         ZStack {
             //Color.green.ignoresSafeArea(edges: .top)
             VStack(spacing:0){
-                SearchBarView(searchText: $searchText)
                 ScrollView(showsIndicators: false){
                     HStack{
                         CategoryCard(nameCategory: "Phone", nameImage: "ip")
@@ -49,11 +49,20 @@ struct CategoryView: View {
                     ProductTypeView(products:
                             productViewModel.products.filter({$0.type == selectedType})
                     )
+                    .toolbar {
+                        ToolbarItem(placement: .principal) {
+                            Text(selectedType.displayName   )
+                                .font(.headline)
+                        }
+                    }
                 }
+                
             }
             .background(.white)
-            .padding(.top,1)
+            .padding(.top,70)
+            SearchBarView(searchText: $searchText)
         }
+        
     }
 }
 
