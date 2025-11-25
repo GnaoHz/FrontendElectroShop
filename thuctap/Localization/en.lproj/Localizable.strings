@@ -1,0 +1,34 @@
+/* Home */
+"home.title" = "Home";
+"home.categories" = "Categories";
+"home.search_placeholder" = "Search products";
+
+/* Category Names */
+"category.phone" = "Phone";
+"category.tablet" = "Tablet";
+"category.laptop" = "Laptop";
+"category.pc" = "PC";
+"category.audio" = "Audio";
+"category.smartwatch" = "Smartwatch";
+"category.gaming" = "Gaming";
+"category.accessory" = "Accessory";
+
+/* Product List */
+"product.list.title" = "Product List";
+"product.price" = "Price";
+"product.rating" = "Rating";
+
+/* Product Detail */
+"detail.title" = "Product Detail";
+"detail.add_to_cart" = "Add to Cart";
+"detail.description" = "Description";
+
+/* Cart */
+"cart.title" = "My Cart";
+"cart.total" = "Total";
+"cart.checkout" = "Checkout";
+
+/* Common */
+"button.back" = "Back";
+"button.ok" = "OK";
+"button.cancel" = "Cancel";

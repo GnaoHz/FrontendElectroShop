@@ -1,0 +1,34 @@
+/* Home */
+"home.title" = "Trang chủ";
+"home.categories" = "Danh mục";
+"home.search_placeholder" = "Tìm kiếm sản phẩm";
+
+/* Category Names */
+"category.phone" = "Điện thoại";
+"category.tablet" = "Máy tính bảng";
+"category.laptop" = "Laptop";
+"category.pc" = "Máy tính bàn";
+"category.audio" = "Âm thanh";
+"category.smartwatch" = "Đồng hồ thông minh";
+"category.gaming" = "Gaming";
+"category.accessory" = "Phụ kiện";
+
+/* Product List */
+"product.list.title" = "Danh sách sản phẩm";
+"product.price" = "Giá";
+"product.rating" = "Đánh giá";
+
+/* Product Detail */
+"detail.title" = "Chi tiết sản phẩm";
+"detail.add_to_cart" = "Thêm vào giỏ";
+"detail.description" = "Mô tả";
+
+/* Cart */
+"cart.title" = "Giỏ hàng";
+"cart.total" = "Tổng tiền";
+"cart.checkout" = "Thanh toán";
+
+/* Common */
+"button.back" = "Quay lại";
+"button.ok" = "Đồng ý";
+"button.cancel" = "Hủy";

@@ -52,7 +52,7 @@ struct CategoryView: View {
                     .toolbar {
                         ToolbarItem(placement: .principal) {
                             Text(selectedType.displayName   )
-                                .font(.headline)
+                                .font(.system(size: 20, weight: .bold))
                         }
                     }
                 }
