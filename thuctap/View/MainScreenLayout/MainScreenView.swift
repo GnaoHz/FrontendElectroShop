@@ -5,7 +5,7 @@ struct MainScreenView: View {
     @StateObject var userViewModel = UserViewModel()
     @StateObject var productViewModel = ProductViewModel()
     @StateObject var cartViewModel = CartViewModel()
-    @State private var selectedTab: Tab = .home
+    @State private var selectedTab: Tab = .person
     
     var body: some View {
         NavigationStack {

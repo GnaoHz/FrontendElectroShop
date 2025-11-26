@@ -11,42 +11,48 @@ struct ProfileMenuView: View {
                     ProfileMenuItemView(
                         nameIcon:"person.fill",
                         colorIcon:Color.blue,
-                        nameItem: "Personal Information",
+                        nameItem: NSLocalizedString("personalInformation.title",comment:""),
                         destination: PersonalInformation()
                     )
                     
                     ProfileMenuItemView(
                         nameIcon:"location.fill",
                         colorIcon:Color.red,
-                        nameItem: "Address",
+                        nameItem: NSLocalizedString("address.title",comment:""),
                         destination: PersonalInformation()
                     )
                     
                     ProfileMenuItemView(
                         nameIcon:"dot.scope",
                         colorIcon:Color.black,
-                        nameItem: "Order Tracking",
+                        nameItem: NSLocalizedString("orderTracking.title",comment:""),
                         destination: PersonalInformation()
                     )
                     
                     ProfileMenuItemView(
                         nameIcon:"envelope.fill",
                         colorIcon:Color.yellow,
-                        nameItem: "Change email",
+                        nameItem: NSLocalizedString("changeEmail.title",comment:""),
                         destination: PersonalInformation()
                     )
                     
                     ProfileMenuItemView(
                         nameIcon:"lock.fill",
                         colorIcon:Color.green,
-                        nameItem: "Change password",
+                        nameItem: NSLocalizedString("changePassword.title",comment:""),
                         destination: ChangePassword()
+                    )
+                    ProfileMenuItemView(
+                        nameIcon:"globe.fill",
+                        colorIcon:Color.blue,
+                        nameItem: NSLocalizedString("profile.language.title",comment:""),
+                        destination: Language()
                     )
                     
                     ProfileMenuItemView(
                         nameIcon:"bell.fill",
                         colorIcon:Color.orange,
-                        nameItem: "Notification",
+                        nameItem: NSLocalizedString("notification.title",comment:""),
                         destination: NotificationView()
                     )
                     
@@ -54,7 +60,7 @@ struct ProfileMenuView: View {
                     ProfileMenuItemView(
                         nameIcon:"door.left.hand.open",
                         colorIcon:Color.black,
-                        nameItem: "Logout",
+                        nameItem: NSLocalizedString("logout.title",comment:""),
                         destination: EmptyView()
                     )
                     .onTapGesture {

@@ -32,3 +32,13 @@
 "button.back" = "Back";
 "button.ok" = "OK";
 "button.cancel" = "Cancel";
+
+/* Profile */
+"personalInformation.title"="Personal Information";
+"address.title"="Address";
+"orderTracking.title"="Order Tracking";
+"changeEmail.title"="Change Email";
+"changePassword.title"="Change Password";
+"profile.language.title" = "Language";
+"notification.title"="Notification";
+"logout.title"="Log out";

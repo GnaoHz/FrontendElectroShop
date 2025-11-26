@@ -32,3 +32,13 @@
 "button.back" = "Quay lại";
 "button.ok" = "Đồng ý";
 "button.cancel" = "Hủy";
+
+/* Profile */
+"personalInformation.title"="Thông tin cá nhân";
+"address.title"="Địa chỉ";
+"orderTracking"="Theo dõi đơn hàng";
+"changeEmail"="Thay đổi email";
+"changePassword"="Thay đổi mật khẩu";
+"profile.language.title" = "Ngôn ngữ";
+"notification.title"="Thông báo";
+"logout.title"="Đăng xuất";
