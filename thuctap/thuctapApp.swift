@@ -5,9 +5,13 @@ import SwiftUI
 @main
 struct thuctapApp: App {
     @StateObject var appState = AppState()
+    @StateObject var languageSettings = LanguageSettings()
     var body: some Scene {
         WindowGroup {
-            RootView().environmentObject(appState)
+            RootView()
+                .environmentObject(appState)
+                .environmentObject(languageSettings)
+                .environment(\.locale,languageSettings.currentLanguage)
         }
     }
 }
