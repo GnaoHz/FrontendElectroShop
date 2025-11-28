@@ -25,5 +25,11 @@ struct MainScreenView: View {
 }
 
 #Preview {
+    @Previewable @StateObject var tempSettings = LanguageSettings()
+    
+   
     MainScreenView()
+        .environmentObject(tempSettings)
+      
+        .environment(\.locale, tempSettings.currentLanguage)
 }

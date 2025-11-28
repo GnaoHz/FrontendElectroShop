@@ -7,14 +7,14 @@ struct Language: View {
         
         var body: some View {
             VStack(spacing: 20) {
-                // Text sẽ tự động dịch dựa trên Locale mới nhất
+               
                 Text("personalInformation.title")
                     .font(.largeTitle)
                 
                 Text("personalInformation.title")
                 
                 Button("Switch to English") {
-                    // Cập nhật giá trị, kích hoạt làm mới giao diện
+                    
                     languageSettings.currentLanguage = Locale(identifier: "en")
                 }
                 .buttonStyle(.borderedProminent)

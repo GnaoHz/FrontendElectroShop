@@ -4,7 +4,7 @@ import SwiftUI
 
 struct ProfileMenuView: View {
     @EnvironmentObject var appState: AppState
-    
+    @EnvironmentObject var languageSettings : LanguageSettings
     var body: some View {
             ScrollView {
                 VStack(spacing: 15) {
@@ -25,7 +25,10 @@ struct ProfileMenuView: View {
                     ProfileMenuItemView(
                         nameIcon:"dot.scope",
                         colorIcon:Color.black,
-                        nameItem: NSLocalizedString("orderTracking.title",comment:""),
+                        nameItem: LocalizableManager.localizedString(
+                            key: "orderTracking.title",
+                            locale: languageSettings.currentLocale
+                         ),
                         destination: PersonalInformation()
                     )
                     
