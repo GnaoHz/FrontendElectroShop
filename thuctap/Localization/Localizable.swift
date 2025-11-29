@@ -1,9 +1,6 @@
 import Foundation
 import SwiftUI
 
-class LanguageSettings: ObservableObject {
-    @Published var currentLanguage: Locale = Locale(identifier: "vi")
-}
 
 class LocalizableManager {
     static func getBundle(for locale: Locale) -> Bundle {
@@ -19,6 +16,7 @@ class LocalizableManager {
         }
         return localeBundle
     }
+    
     static func localziedString(key:String,locale:Locale)->String{
         let bundle = getBundle(for: locale)
         return NSLocalizedString(key, bundle: bundle,  comment: "")
