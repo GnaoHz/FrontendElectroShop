@@ -1,7 +1,6 @@
 import Foundation
 import SwiftUI
 
-
 class LocalizableManager {
     static func getBundle(for locale: Locale) -> Bundle {
         let currentLanguage = locale.identifier
