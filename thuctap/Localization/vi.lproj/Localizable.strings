@@ -42,3 +42,6 @@
 "profile.language.title" = "Ngôn ngữ";
 "notification.title"="Thông báo";
 "logout.title"="Đăng xuất";
+
+/* Customer Support*/
+"customerSupport.welcomeMessage"="Xin chào, đây là bộ phận hỗ trợ khách hàng. Tôi có thể giúp gì cho bạn?";

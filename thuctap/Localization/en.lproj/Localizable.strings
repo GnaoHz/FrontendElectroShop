@@ -42,3 +42,6 @@
 "profile.language.title" = "Language";
 "notification.title"="Notification";
 "logout.title"="Log out";
+
+/* Customer Support*/
+"customerSupport.welcomeMessage"="Hello! This is the customer support team. How can I assist you today?";

@@ -22,7 +22,7 @@ struct ProfileMenuView: View {
                     nameIcon: "location.fill",
                     colorIcon: .red,
                     nameItem: local("address.title"),
-                    destination: PersonalInformation()
+                    destination: CustomerSupportChatView()
                 )
                 
                 ProfileMenuItemView(

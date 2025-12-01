@@ -1,21 +1,15 @@
 import SwiftUI
 
-struct Message: Identifiable, Equatable {
-    let id = UUID()
-    let content: String
-    let timestamp: Date = Date()
-    let isCustomer: Bool
-}
+
 
 struct MessageBubble: View {
-    let message: Message
+    let message: MessageSupport
 
     var body: some View {
         HStack {
             if message.isCustomer {
                 Spacer()
             }
-            
             VStack(alignment: message.isCustomer ? .trailing : .leading, spacing: 5) {
                 Text(message.content)
                     .padding(10)
@@ -37,8 +31,12 @@ struct MessageBubble: View {
 }
 
 struct CustomerSupportChatView: View {
-    @State private var messages: [Message] = [
-        Message(content: "Xin chào, đây là bộ phận hỗ trợ khách hàng. Tôi có thể giúp gì cho bạn?", isCustomer: false)
+    @EnvironmentObject var languageSettings : LanguageSettings
+    @State private var messages: [MessageSupport] = [
+        MessageSupport(
+            content: "Xin chào, đây là bộ phận hỗ trợ khách hàng. Tôi có thể giúp gì cho bạn?",
+            isCustomer: false
+        )
     ]
     @State private var inputMessage: String = ""
     @State private var lastMessageId: UUID?
@@ -89,7 +87,7 @@ struct CustomerSupportChatView: View {
         let content = inputMessage.trimmingCharacters(in: .whitespacesAndNewlines)
         guard !content.isEmpty else { return }
         
-        let customerMessage = Message(content: content, isCustomer: true)
+        let customerMessage = MessageSupport(content: content, isCustomer: true)
         messages.append(customerMessage)
         lastMessageId = customerMessage.id
         
@@ -97,7 +95,7 @@ struct CustomerSupportChatView: View {
         
         DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
             let responseContent = simpleAIBotResponse(for: content)
-            let supportMessage = Message(content: responseContent, isCustomer: false)
+            let supportMessage = MessageSupport(content: responseContent, isCustomer: false)
             messages.append(supportMessage)
             lastMessageId = supportMessage.id
         }
