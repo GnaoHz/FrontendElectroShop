@@ -45,3 +45,4 @@
 
 /* Customer Support*/
 "customerSupport.welcomeMessage"="Hello! This is the customer support team. How can I assist you today?";
+"customerSupport.inputPlaceholder" = "Type a message...";

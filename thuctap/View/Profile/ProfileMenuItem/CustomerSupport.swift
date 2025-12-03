@@ -35,7 +35,6 @@ struct MessageBubbleView: View {
 }
 
 struct CustomerSupportChatView: View {
-    @EnvironmentObject var languageSettings: LanguageSettings
     
     @State private var messages: [MessageSupport] = [
         MessageSupport(
@@ -68,10 +67,9 @@ struct CustomerSupportChatView: View {
                     }
                 }
             }
-
             HStack {
                 TextField(
-                    LocalizableManager.localziedString(key: "Nhập tin nhắn...", locale: languageSettings.currentLanguage)
+                    LanguageSettings.shared.translate(key: "customerSupport.inputPlaceholder")
                     ,
                     text: $inputMessage,
                     axis: .vertical

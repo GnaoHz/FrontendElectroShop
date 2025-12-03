@@ -45,3 +45,4 @@
 
 /* Customer Support*/
 "customerSupport.welcomeMessage"="Xin chào, đây là bộ phận hỗ trợ khách hàng. Tôi có thể giúp gì cho bạn?";
+"customerSupport.inputPlaceholder" = "Nhập tin nhắn ...";
