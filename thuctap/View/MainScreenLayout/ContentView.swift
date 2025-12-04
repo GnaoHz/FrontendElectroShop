@@ -7,7 +7,7 @@ struct ContentView: View {
     var body: some View {
         switch selectedTab {
         case .home:
-            HomeView()
+            AddressView()
         case .person:
             ProfileView()
         case .favorite:

@@ -2,7 +2,7 @@
 
 import SwiftUI
 
-struct HomeView: View {
+struct AddressView: View {
     @State private var searchText: String = ""
     var body: some View {
         ZStack {
@@ -22,5 +22,5 @@ struct HomeView: View {
     }
 }
 #Preview {
-    HomeView()
+    AddressView()
 }
