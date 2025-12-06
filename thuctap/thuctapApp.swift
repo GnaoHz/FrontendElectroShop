@@ -16,6 +16,7 @@ struct thuctapApp: App {
         }
     }
 }
+
 struct RootView: View {
     @EnvironmentObject var appState: AppState
 
@@ -33,6 +34,7 @@ class AppState: ObservableObject {
     @Published var currentScreen: AppScreen = .intro
     @Published var isLoggedIn: Bool = false
 }
+
 struct AuthFlowView: View {
     @EnvironmentObject var appState: AppState
 
@@ -57,6 +59,7 @@ enum AppScreen {
     case register
     case mainscreen
 }
+
 struct MainFlowView: View {
     var body: some View {
         NavigationStack {
