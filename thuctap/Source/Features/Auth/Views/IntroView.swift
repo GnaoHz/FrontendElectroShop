@@ -3,7 +3,7 @@
 import SwiftUI
 
 struct IntroView: View {
-    @EnvironmentObject var appState: AppState
+    @ObservedObject var introViewModel: IntroViewModel
     @State private var showLogo: Bool = false
     @State private var showText: Bool = false
     @State private var showTagline: Bool = false
@@ -33,7 +33,7 @@ struct IntroView: View {
             Spacer()
             
             Button(action:{
-                appState.currentScreen = .login
+                introViewModel.goToLogin()
             }){
                 HStack{
                     Text("Tiếp tục")
@@ -60,6 +60,5 @@ struct IntroView: View {
 }
 
 #Preview {
-    IntroView()
-        .environmentObject(AppState())
+    IntroView(introViewModel: IntroViewModel(authCoordinator: AuthCoordinator(appCoordinator: AppCoordinator(isLoggedIn: false))))
 }

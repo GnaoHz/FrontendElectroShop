@@ -3,19 +3,18 @@
 import SwiftUI
 
 struct LoginView: View {
-    @EnvironmentObject var appState: AppState
-    @State private var email: String = ""
-    @State private var password: String = ""
-    @State private var isLoginFailed: Bool = true
+    @ObservedObject var loginViewModel: LoginViewModel
+    
+    
     var body: some View {
         VStack{
             VStack(alignment: .leading, spacing: 16) {
                 TitleFontView(titleName: "Sign in")
                 
-                InputField(title: "Email", placeholder: "Email", text: $email)
-                InputField(title: "Password", placeholder: "Password", text: $password, isSecure: true)
+                InputField(title: "Username", placeholder: "Username", text: $loginViewModel.username)
+                InputField(title: "Password", placeholder: "Password", text: $loginViewModel.password, isSecure: true)
                 
-                if isLoginFailed {
+                if loginViewModel.isLoginFailed {
                     Text("The username or password you entered is incorrect.")
                         .font(.system(size: 15,weight: .regular))
                         .foregroundStyle(.red)
@@ -23,7 +22,7 @@ struct LoginView: View {
                 }
                 
                 Button(action: {
-                    self.appState.currentScreen = .mainscreen
+                    loginViewModel.checkLogin()
                 }) {
                     Text("Login")
                         .font(.system(size: 20,weight: .bold))
@@ -48,7 +47,7 @@ struct LoginView: View {
                     }
                     Spacer(minLength: 0)
                     Button(action: {
-                        self.appState.currentScreen = .register
+                        loginViewModel.navigateToRegister()
                     }){
                         Text("Sign up")
                     }
@@ -127,5 +126,7 @@ struct InputField: View {
 }
 
 #Preview {
-    LoginView().environmentObject(AppState())
+    let appC=AppCoordinator(isLoggedIn: false)
+    let authC=AuthCoordinator(appCoordinator: appC)
+    LoginView(loginViewModel: LoginViewModel(authCoordinator: authC))
 }

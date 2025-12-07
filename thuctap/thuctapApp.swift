@@ -1,69 +1,26 @@
-
-
 import SwiftUI
 
 @main
 struct thuctapApp: App {
-    @StateObject var appState = AppState()
-    @StateObject var languageSettings = LanguageSettings()
+    // AppCoordinator là nguồn duy nhất quản lý các Flows
+    @StateObject var appCoordinator: AppCoordinator
+
+    init() {
+        // Giả sử kiểm tra trạng thái đăng nhập ban đầu
+        let isLoggedInInitialState = UserDefaults.standard.bool(forKey: "user_logged_in")
+        
+        _appCoordinator = StateObject(wrappedValue: AppCoordinator(
+            isLoggedIn: isLoggedInInitialState
+        ))
+    }
 
     var body: some Scene {
         WindowGroup {
-            RootView()
-                .environmentObject(appState)
-                .environmentObject(languageSettings)
-                .environment(\.locale, languageSettings.currentLanguage)
-        }
-    }
-}
-
-struct RootView: View {
-    @EnvironmentObject var appState: AppState
-
-    var body: some View {
-        Group {
-            if appState.isLoggedIn {
-                MainFlowView()
-            } else {
-                AuthFlowView()
-            }
-        }
-    }
-}
-class AppState: ObservableObject {
-    @Published var currentScreen: AppScreen = .intro
-    @Published var isLoggedIn: Bool = false
-}
-
-struct AuthFlowView: View {
-    @EnvironmentObject var appState: AppState
-
-    var body: some View {
-        NavigationStack {
-            switch appState.currentScreen {
-            case .intro:
-                IntroView()
-            case .login:
-                LoginView()
-            case .register:
-                RegisterView()
-            default:
-                IntroView()
-            }
-        }
-    }
-}
-enum AppScreen {
-    case intro
-    case login
-    case register
-    case mainscreen
-}
-
-struct MainFlowView: View {
-    var body: some View {
-        NavigationStack {
-            MainScreenView()
+            // Chỉ cần gọi start() của AppCoordinator
+            appCoordinator.start()
+                // Truyền AppCoordinator là EnvironmentObject
+                .environmentObject(appCoordinator)
+                // ⚠️ BỎ LanguageSettings
         }
     }
 }

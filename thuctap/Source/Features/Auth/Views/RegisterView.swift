@@ -3,7 +3,7 @@
 import SwiftUI
 
 struct RegisterView: View {
-    @EnvironmentObject var appState: AppState
+    @ob
     @State private var email: String = ""
     @State private var password: String = ""
     @State private var confirmPassword: String = ""
