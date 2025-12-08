@@ -6,6 +6,7 @@ enum MainScreen{
     case home, category, cart, favorite, person
 }
 
+
 final class MainCoordinator: ObservableObject {
     @Published var currrentScreen: MainScreen = .home
     
@@ -20,5 +21,11 @@ final class MainCoordinator: ObservableObject {
         
     }
     
+    func navigateTo(screen: MainScreen) {
+        self.currrentScreen = screen
+    }
     
+    func didLogout() {
+        appCoordinator.didLoggedOut()
+    }
 }

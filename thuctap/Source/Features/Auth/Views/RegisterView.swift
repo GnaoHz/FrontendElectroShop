@@ -3,13 +3,8 @@
 import SwiftUI
 
 struct RegisterView: View {
-    @ob
-    @State private var email: String = ""
-    @State private var password: String = ""
-    @State private var confirmPassword: String = ""
-    @State private var isEmailFailed: Bool = false
-    @State private var isPasswordFailed: Bool = false
-    @State private var isConfirmPassword: Bool = false
+    @ObservedObject var registerViewModel: RegisterViewModel
+    
     var body: some View {
         VStack(alignment: .leading, spacing: 16) {
             HStack {
@@ -19,16 +14,16 @@ struct RegisterView: View {
             .foregroundStyle(.blue)
             .padding(.leading,10)
             .onTapGesture {
-                self.appState.currentScreen = .login
+                    registerViewModel.backLogin()
             }
             
             TitleFontView(titleName:  "Sign up")
             
-            InputField(title: "Email", placeholder: "Email", text: $email)
-            InputField(title: "Password", placeholder: "Password", text: $password, isSecure: false)
-            InputField(title: "ConfirmPassword", placeholder: "ConfirmPassword", text: $confirmPassword, isSecure: false)
+            InputField(title: "Username", placeholder: "Username", text: $registerViewModel.email)
+            InputField(title: "Password", placeholder: "Password", text: $registerViewModel.password, isSecure: false)
+            InputField(title: "ConfirmPassword", placeholder: "ConfirmPassword", text: $registerViewModel.confirmPassword, isSecure: false)
             
-            if isEmailFailed {
+            if registerViewModel.isEmailfailed {
                 Text("The username or password you entered is incorrect.")
                     .font(.system(size: 15,weight: .regular))
                     .foregroundStyle(.red)
@@ -36,7 +31,7 @@ struct RegisterView: View {
             }
             
             Button(action: {
-                self.appState.currentScreen = .mainscreen
+                registerViewModel.checkField()
             }) {
                 Text("Register")
                     .font(.system(size: 20,weight: .bold))
@@ -55,6 +50,8 @@ struct RegisterView: View {
 }
 
 #Preview {
-    RegisterView().environmentObject(AppState())
+    let appC=AppCoordinator(isLoggedIn: false)
+    let authC=AuthCoordinator(appCoordinator: appC)
+    RegisterView(registerViewModel: RegisterViewModel(authCoordinator: authC))
 }
 

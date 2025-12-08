@@ -17,5 +17,9 @@ class RegisterViewModel:ObservableObject{
     func checkField(){
         authCoordinator.navigateToMainFlow()
     }
+    
+    func backLogin(){
+        authCoordinator.navigateToLogin()
+    }
 }
 
