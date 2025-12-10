@@ -1,4 +1,5 @@
 import Foundation
+import SwiftUI
 
 struct Product : Identifiable, Hashable{
     var id: UUID = UUID()
@@ -42,21 +43,28 @@ enum ProductType: String, Hashable, CaseIterable {
 }
 
 extension ProductType {
-    var displayName: String {
+    
+    var categoryColor: Color {
         switch self {
-        case .iphone: return "Phone"
-        case .tablet: return "Tablet"
-        case .laptop: return "Laptop"
-        case .pc: return "PC"
-        case .audio: return "Audio"
-        case .smartwatch: return "Smartwatch"
-        case .gaming: return "Gaming"
-        case .accessory: return "Accessory"
+        case .iphone:
+            return Color(red: 0.8, green: 0.5, blue: 0.8) // Hồng nhạt
+        case .laptop:
+            return Color(.blue.opacity(0.65)) // Xanh dương nhạt
+        case .tablet:
+            return Color(.yellow.opacity(0.7)) // Vàng chanh nhạt
+        case .pc:
+            return Color(red: 0.8, green: 0.7, blue: 0.95) // Tím nhạt
+        case .audio:
+            return Color(red: 0.95, green: 0.8, blue: 0.7) // Cam nhạt
+        case .smartwatch:
+            return Color(red: 0.7, green: 0.95, blue: 0.8) // Xanh ngọc nhạt
+        case .gaming:
+            return Color(.green.opacity(0.7))
+        case .accessory:
+            return Color(red: 0.9, green: 0.9, blue: 0.9) // Trắng xám
         }
     }
 }
-
-
 
 let popularProducts: [Product] = [
     Product(

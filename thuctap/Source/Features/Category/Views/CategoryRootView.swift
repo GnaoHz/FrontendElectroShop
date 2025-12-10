@@ -5,7 +5,8 @@ struct CategoryRootView: View {
     
     private let gridLayout = [
         GridItem(.flexible(), spacing: 15),
-        GridItem(.flexible(), spacing: 15)
+        GridItem(.flexible(), spacing: 15),
+        
     ]
     
     let categories: [ProductType] = ProductType.allCases
@@ -75,13 +76,13 @@ struct CategoryCardView: View {
                 .frame(width: 100, height: 100)
             
             Text(type.rawValue.capitalized)
-                .font(.headline)
+                .font(.system(size: 20, weight: .semibold))
                 .foregroundColor(.black)
         }
         .frame(height: 150)
         .frame(maxWidth: .infinity)
         .padding(10)
-        .background(Color(red: 0.5, green: 0.9, blue: 0.8))
+        .background(type.categoryColor)
         .cornerRadius(15)
         .shadow(color: .black.opacity(0.05), radius: 5, x: 0, y: 3)
     }
