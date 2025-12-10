@@ -5,7 +5,7 @@ struct ProfileRootView: View {
         ZStack {
             Color(red: 81 / 255, green: 77 / 255, blue: 163 / 255)
                 .edgesIgnoringSafeArea(.all)
-            VStack(spacing: 0) {
+            VStack(spacing: 20) {
 
                 VStack {
                     Text("Profile")
@@ -14,85 +14,87 @@ struct ProfileRootView: View {
                         .foregroundStyle(.white)
 
                     HStack(spacing: 16) {
-                        Image("avatar")
+                        Image("avt")
                             .resizable()
                             .scaledToFill()
                             .frame(width: 70, height: 70)
                             .clipShape(Circle())
-                            .overlay(Circle().stroke(Color.white, lineWidth: 2))
+                            .overlay(Circle().stroke(Color.black, lineWidth: 1))
 
-                        VStack(alignment: .leading, spacing: 4) {
+                        VStack(alignment: .center, spacing: 4) {
                             Text("Nguyen Viet Hoang")
                                 .font(.headline)
-                                .foregroundColor(.white)
+                                .foregroundColor(.black)
 
                             Text("No Email")
                                 .font(.subheadline)
-                                .foregroundColor(.white.opacity(0.8))
+                                .foregroundColor(.black)
                         }
-
                     }
                     .padding(20)
-                    .background()
+                    .background(
+                        RoundedRectangle(cornerRadius: 20)
+                            .fill(.white)
 
-                    Spacer().frame(height: 25)
+                    )
                 }
-                
 
                 ScrollView {
                     VStack(spacing: 16) {
 
                         ProfileRow(
                             icon: "person.circle",
-                            title: "Personal Information"
+                            title: "Personal Information",
+                            color: .blue,
+                            destination: PersonalInfoView()
                         )
-                        ProfileRow(icon: "location.circle", title: "Address")
-                        ProfileRow(icon: "scope", title: "Order Tracking")
+                        ProfileRow(
+                            icon: "location.circle",
+                            title: "Address",
+                            color: .red,
+                            destination: PersonalInfoView()
+                        )
+                        ProfileRow(
+                            icon: "scope",
+                            title: "Order Tracking",
+                            color: .black,
+                            destination: PersonalInfoView()
+                        )
                         ProfileRow(
                             icon: "envelope.circle",
-                            title: "Change email"
+                            title: "Change email",
+                            color: .yellow,
+                            destination: PersonalInfoView()
                         )
                         ProfileRow(
                             icon: "lock.circle",
-                            title: "Change password"
+                            title: "Change password",
+                            color: .green,
+                            destination: PersonalInfoView()
                         )
-                        ProfileRow(icon: "bell.circle", title: "Notification")
+                        ProfileRow(
+                            icon: "bell.circle",
+                            title: "Notification",
+                            color: .orange,
+                            destination: PersonalInfoView()
+                        )
                         ProfileRow(
                             icon: "rectangle.portrait.and.arrow.right",
-                            title: "Logout"
+                            title: "Logout",
+                            color: .blue,
+                            destination: PersonalInfoView()
                         )
                     }
                     .padding()
                 }
+                .background(
+                    RoundedRectangle(cornerRadius: 20)
+                        .fill(.white)
+                )
+                .ignoresSafeArea(edges: .bottom)
             }
+
         }
-    }
-}
-
-struct ProfileRow: View {
-    let icon: String
-    let title: String
-
-    var body: some View {
-        HStack {
-            Image(systemName: icon)
-                .font(.system(size: 22))
-                .foregroundColor(.black)
-
-            Text(title)
-                .font(.system(size: 17))
-                .foregroundColor(.black)
-
-            Spacer()
-
-            Image(systemName: "chevron.right")
-                .font(.system(size: 16))
-                .foregroundColor(.gray)
-        }
-        .padding()
-        .background(Color.white)
-        .cornerRadius(14)
-        .shadow(color: .black.opacity(0.1), radius: 5, x: 0, y: 4)
     }
 }
 

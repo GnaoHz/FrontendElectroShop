@@ -33,14 +33,16 @@ struct MainFlowVỉew: View {
                     .tag(MainScreen.favorite)
 
                 
-                ProfileRootView()
-                    .tabItem {
-                        Label("Profile", systemImage: "person.fill")
-                    }
-                    .tag(MainScreen.person)
+                NavigationStack {
+                    ProfileRootView()
+                }
+                .tabItem {
+                    Label("Profile", systemImage: "person.fill")
+                }
+                .tag(MainScreen.person)
             }
             
-            .onChange(of: selectedTab) { newTab in
+            .onChange(of: selectedTab) { _, newTab in
                 mainCoordinator.navigateTo(screen: newTab)
             }
         }
