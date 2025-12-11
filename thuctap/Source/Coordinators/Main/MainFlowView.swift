@@ -2,7 +2,7 @@ import SwiftUI
 
 struct MainFlowVỉew: View {
     @ObservedObject var mainCoordinator: MainCoordinator
-    @State private var selectedTab: MainScreen = .person
+    @State private var selectedTab: MainScreen = .home
     var body: some View {
             
             TabView(selection: $selectedTab) {
@@ -34,7 +34,7 @@ struct MainFlowVỉew: View {
 
                 
                 NavigationStack {
-                    ProfileRootView()
+                    ProfileRootView(mainCoordinator: mainCoordinator)
                 }
                 .tabItem {
                     Label("Profile", systemImage: "person.fill")

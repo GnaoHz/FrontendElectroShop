@@ -5,7 +5,7 @@ struct ProfileRow<Destination: View>: View {
     let color: Color
     let destination : Destination
     var body: some View {
-        NavigationLink(destination: PersonalInfoView()) {
+        NavigationLink(destination: destination) {
             HStack {
                 Image(systemName: icon)
                     .font(.system(size: 22))

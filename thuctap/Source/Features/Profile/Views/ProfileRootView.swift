@@ -1,6 +1,7 @@
 import SwiftUI
 
 struct ProfileRootView: View {
+    @ObservedObject var mainCoordinator: MainCoordinator
     var body: some View {
         ZStack {
             Color(red: 81 / 255, green: 77 / 255, blue: 163 / 255)
@@ -52,38 +53,55 @@ struct ProfileRootView: View {
                             icon: "location.circle",
                             title: "Address",
                             color: .red,
-                            destination: PersonalInfoView()
+                            destination: EmptyAddressView()
                         )
                         ProfileRow(
                             icon: "scope",
                             title: "Order Tracking",
                             color: .black,
-                            destination: PersonalInfoView()
+                            destination: OrderTrackingRootView()
                         )
                         ProfileRow(
-                            icon: "envelope.circle",
-                            title: "Change email",
-                            color: .yellow,
-                            destination: PersonalInfoView()
+                            icon: "globe",
+                            title: "Language",
+                            color: .blue,
+                            destination: LanguageSettingRootView()
                         )
                         ProfileRow(
                             icon: "lock.circle",
                             title: "Change password",
                             color: .green,
-                            destination: PersonalInfoView()
+                            destination: ChangePasswordView()
                         )
                         ProfileRow(
                             icon: "bell.circle",
                             title: "Notification",
                             color: .orange,
-                            destination: PersonalInfoView()
+                            destination: NotificationRootView()
                         )
-                        ProfileRow(
-                            icon: "rectangle.portrait.and.arrow.right",
-                            title: "Logout",
-                            color: .blue,
-                            destination: PersonalInfoView()
-                        )
+                        Button(action:{
+                            mainCoordinator.didLogout()
+                        }){
+                            HStack {
+                                Image(systemName: "rectangle.portrait.and.arrow.right")
+                                    .font(.system(size: 22))
+                                    .foregroundColor(.blue)
+                                
+                                Text("Logout")
+                                    .font(.system(size: 17))
+                                    .foregroundColor(.black)
+                                
+                                Spacer()
+                                
+                                Image(systemName: "chevron.right")
+                                    .font(.system(size: 16))
+                                    .foregroundColor(.gray)
+                            }
+                        }
+                        .padding()
+                        .background(Color.white)
+                        .cornerRadius(14)
+                        .shadow(color: .black.opacity(0.3), radius: 5, x: 0, y: 4)
                     }
                     .padding()
                 }
@@ -99,5 +117,5 @@ struct ProfileRootView: View {
 }
 
 #Preview {
-    ProfileRootView()
+    ProfileRootView(mainCoordinator: MainCoordinator(appCoordinator: AppCoordinator(isLoggedIn: false)))
 }
