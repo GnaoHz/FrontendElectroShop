@@ -76,12 +76,14 @@ struct PopularContentSection: View {
                 Text("Popular ")
                     .font(.title2.bold())
                 Spacer()
-                Text("See All")
-                    .foregroundColor(.blue)
+                NavigationLink(destination: ProductTypeListView(products: popularData)) {
+                    Text("See All")
+                        .foregroundColor(.blue)
+                }
             }
             .padding(.horizontal)
             LazyVGrid(columns: gridLayout, spacing: 20) {
-                ForEach(popularData) { item in
+                ForEach(popularData.prefix(2)) { item in
                     PopularCardView(product: item)
                 }
             }

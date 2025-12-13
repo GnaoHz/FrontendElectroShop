@@ -18,7 +18,7 @@ final class MainCoordinator: ObservableObject {
     
     @ViewBuilder
     func start() -> some View {
-        
+        MainFlowVỉew(mainCoordinator: self)
     }
     
     func navigateTo(screen: MainScreen) {

@@ -11,6 +11,28 @@ struct CategoryRootView: View {
     
     let categories: [ProductType] = ProductType.allCases
 
+    func productsFor(_ type: ProductType) -> [Product] {
+        switch type {
+        case .iphone:
+            return productIphone
+        
+        case .laptop:
+            return productLaptop
+        case .accessory:
+            return productIphone
+        case .audio:
+            return productIphone
+        case .gaming:
+            return productIphone
+        case .smartwatch:
+            return productIphone
+        case .pc:
+            return productIphone
+        case .tablet:
+            return productTablet
+        }
+    }
+    
     var body: some View {
         ZStack(alignment: .top) {
             
@@ -28,7 +50,8 @@ struct CategoryRootView: View {
                     LazyVGrid(columns: gridLayout, spacing: 15) {
                         ForEach(categories, id: \.self) { type in
                             let imageName = type.rawValue.lowercased()
-                            CategoryCardView(type: type, imageName: imageName)
+                            
+                            CategoryCardView(type: type, imageName: imageName,destination: ProductTypeListView(products: productsFor(type)))
                         }
                     }
                     .padding(.horizontal)
@@ -61,30 +84,34 @@ struct CategoryRootView: View {
 }
 
 
-struct CategoryCardView: View {
+struct CategoryCardView<Destination: View>: View {
     
     let type: ProductType
     
     let imageName: String
-
+    
+    let destination: Destination
+    
     var body: some View {
-        VStack(spacing: 15) {
-            
-            Image(imageName)
-                .resizable()
-                .scaledToFit()
-                .frame(width: 100, height: 100)
-            
-            Text(type.rawValue.capitalized)
-                .font(.system(size: 20, weight: .semibold))
-                .foregroundColor(.black)
+        NavigationLink(destination: destination) {
+            VStack(spacing: 15) {
+                
+                Image(imageName)
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width: 100, height: 100)
+                
+                Text(type.rawValue.capitalized)
+                    .font(.system(size: 20, weight: .semibold))
+                    .foregroundColor(.black)
+            }
+            .frame(height: 150)
+            .frame(maxWidth: .infinity)
+            .padding(10)
+            .background(type.categoryColor)
+            .cornerRadius(15)
+            .shadow(color: .black.opacity(0.05), radius: 5, x: 0, y: 3)
         }
-        .frame(height: 150)
-        .frame(maxWidth: .infinity)
-        .padding(10)
-        .background(type.categoryColor)
-        .cornerRadius(15)
-        .shadow(color: .black.opacity(0.05), radius: 5, x: 0, y: 3)
     }
 }
 

@@ -2,26 +2,29 @@ import SwiftUI
 
 struct AdCardView: View {
     let item: ContentItem
+    
     var body: some View {
-        VStack(alignment: .leading) {
-            HStack {
-                Spacer()
-                Image("ip1")
-                    .resizable()
-                    .scaledToFit()
-                Spacer()
+        NavigationLink(destination: ProductDetailView(product: item.product)) {
+            VStack(alignment: .leading) {
+                HStack {
+                    Spacer()
+                    Image(item.nameImage)
+                        .resizable()
+                        .scaledToFit()
+                    Spacer()
+                }
+                Text(item.title)
+                    .font(.title3.bold())
+                    .foregroundColor(.white)
+                Text(item.description)
+                    .font(.caption)
+                    .foregroundColor(.white.opacity(0.9))
             }
-            Text(item.title)
-                .font(.title3.bold())
-                .foregroundColor(.white)
-            Text(item.description)
-                .font(.caption)
-                .foregroundColor(.white.opacity(0.9))
+            .padding()
+            .frame(width:200,height: 200)
+            .background(item.color)
+            .cornerRadius(20)
         }
-        .padding()
-        .frame(width:200,height: 200)
-        .background(item.color)
-        .cornerRadius(20)
     }
 }
 
